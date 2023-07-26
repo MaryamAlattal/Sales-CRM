@@ -1,0 +1,172 @@
+# Query: trigger_query
+# Flags: CaseSensitive
+# Including: ./Staff
+# ContextLines: 1
+
+35 results - 26 files
+
+Staff\addcustomer.php:
+  102  if(isset($_POST["register"])){
+  103:     require_once ("../trigger_query.php");
+  104     $flag = addcustomertodb();
+
+Staff\addlead.php:
+  102  if (isset($_POST["register"])) {
+  103:     require_once ("../trigger_query.php");
+  104     $flag = addleadtodb();
+
+Staff\addoppmodel.php:
+   1  <?php
+   2: require_once("../trigger_query.php");
+   3  ?>
+
+  83      <?php
+  84:     //  include ("../trigger_query.php");
+  85      if (isset($_GET['btnsend'])){
+
+Staff\addproduct.php:
+   33                                          <?php
+   34:                                         include("../trigger_query.php");
+   35                                          $res = show_category();
+
+  124  // if(isset($_POST["register"])){
+  125: //     require_once ("../trigger_query.php");
+  126  //    $flag = addproducttodb();
+
+Staff\addquotation.php:
+    9  // include ("dashboard_count.php");
+   10: include ("../trigger_query.php");
+   11  ?>
+
+  157  if (isset($_POST["register"])) {
+  158:     require_once ("../trigger_query.php");
+  159     $flag = addleadtodb();
+
+Staff\converttooppo.php:
+  47                                          if($_REQUEST['ldate'] == ""){
+  48:                                             require_once("../trigger_query.php");
+  49                                              $month = $_REQUEST['lmonth'];
+
+  55                                          // echo "calling the function";
+  56:                                         require_once ("../trigger_query.php");
+  57                                          $res = showleadsbydate($date);
+
+Staff\deleteoppo.php:
+   6      include ("header.php");
+   7:     include("../trigger_query.php");
+   8  
+
+  54                      <?php
+  55:                                         // require("../trigger_query.php");
+  56                                          $res = showallopportunities();
+
+Staff\deletequotation.php:
+   6      include ("header.php");
+   7:     include("trigger_query.php");
+   8  
+
+  54                                      <?php
+  55:                                         // require("../trigger_query.php");
+  56                                          $res = show_quotations();
+
+Staff\loadlead.php:
+  1  <?php
+  2:    require("../trigger_query.php");
+  3     $id  = $_REQUEST['id'];
+
+Staff\loadoppo.php:
+  1  <?php
+  2:    require("../trigger_query.php");
+  3     $opid  = $_REQUEST['oppoid'];
+
+Staff\loadquotation.php:
+  1  <?php
+  2: require_once("../trigger_query.php");
+  3  ?>
+
+Staff\showalloppo.php:
+  48                      <?php
+  49:                                         require("../trigger_query.php");
+  50                                          $res = showallopportunities();
+
+Staff\showcustomer.php:
+   90                              <?php
+   91:                                         require("../trigger_query.php");
+   92                                          $res = showallcustomers();
+
+  235      echo "---->".$id;
+  236:     // require("../trigger_query.php");
+  237      $flag = delcustomerrecord($id);
+
+Staff\showlead.php:
+   87                              <?php
+   88:                                         require("../trigger_query.php");
+   89                                          $res = showlast10leads();
+
+  277      //echo $id;
+  278:     // require("trigger_query.php");
+  279      $flag = delleadrecord($id);
+
+Staff\showoneoppo.php:
+  20       
+  21:         require_once ("../trigger_query.php");
+  22  
+
+Staff\showproduct.php:
+   89                              <?php
+   90:                                         require("../trigger_query.php");
+   91                                          $res = showallproducts();
+
+  292      echo "---->".$id;
+  293:     // require("../trigger_query.php");
+  294      $flag = delproductrecord($id);
+
+Staff\showquotationslist.php:
+  42                                      <?php
+  43:                                         require("../trigger_query.php");
+  44                                          $res = show_quotations();
+
+Staff\showsinglecustomer.php:
+  1  <?php
+  2:  require_once("../trigger_query.php");
+  3   $cid = $_GET['cid'];
+
+Staff\showsinglelead.php:
+  1  <?php
+  2:  require_once("../trigger_query.php");
+  3   $lid = $_GET['lid'];
+
+Staff\showsingleoppo.php:
+  28      // echo "------------".$sid;
+  29:     require_once("../trigger_query.php");
+  30      $res = showoneoppo($sid);
+
+Staff\showsingleproduct.php:
+  1  <?php
+  2:  require_once("../trigger_query.php");
+  3   $pid = $_GET['pid'];
+
+Staff\showsinglequotation.php:
+  1  <?php
+  2:  require_once("../trigger_query.php");
+  3   $qid = $_GET['qid'];
+
+Staff\updateoppo.php:
+  50      //echo "------------->".$oid;
+  51:     require_once("../trigger_query.php");
+  52      $count = checkoppoid($oid);
+
+Staff\updateoppotodb.php:
+  2  include ("connection.php");
+  3: require_once("../trigger_query.php");
+  4  $conn = connect();
+
+Staff\updatesinglecustomer.php:
+  2  include ("connection.php");
+  3: require_once("../trigger_query.php");
+  4  $conn = connect();
+
+Staff\updatesinglelead.php:
+  2  include ("connection.php");
+  3: require_once("../trigger_query.php");
+  4  $conn = connect();

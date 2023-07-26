@@ -1,0 +1,183 @@
+ function showquoteoftheday(){
+    include("../connection.php");
+    $conn = connect();
+     //echo "loading the quotes";
+    //  die("----");
+    $query = "SELECT quote FROM `quotes` where id = day(CURDATE())";
+    $result = mysqli_query($conn,$query);
+    if (mysqli_num_rows($result) > 0) {
+        /* output data of each row */
+        while($row = mysqli_fetch_assoc($result)) {
+            $quote = $row['quote'];
+        }
+    }
+    else{
+        return 0;
+    }
+    mysqli_close($conn);
+     return $quote;
+  }
+  function checkcustomeremail($email){
+    include ("../connection.php");
+    $conn = connect();
+    //echo "loading the quotes";
+   //  die("----");
+   $cnt  = 0;
+   $query = "SELECT count(*) as cnt FROM `customer` where email ='".$email."'";
+   $result = mysqli_query($conn,$query);
+   if (mysqli_num_rows($result) > 0) {
+       /* output data of each row */
+       while($row = mysqli_fetch_assoc($result)) {
+           $cnt = $row['cnt'];
+       }
+   }
+   else{
+       return 0;
+   }
+    return $cnt;
+  }
+// function sendmail($subject, $message, $emailid)
+// {
+// // use PHPMailer\PHPMailer\PHPMailer;
+// require_once("../PHPMailer/PHPMailer/src/PHPMailer.php");
+// // use PHPMailer\PHPMailer\Exception;
+// require '../PHPMailer/PHPMailer/src/Exception.php';
+// // require '../PHPMailer/PHPMailer/src/PHPMailer.php';
+// require '../PHPMailer/PHPMailer/src/SMTP.php';
+// $mail = new PHPMailer(true);
+
+//     //Send mail using gmail
+//     if(true){
+//         $mail->IsSMTP(); // telling the class to use SMTP
+//         // $mail->SMTPAuth = true; // enable SMTP authentication
+//         $mail->SMTPSecure = "tls"; // sets the prefix to the servier
+//         $mail->Host = "smtp.gmail.com"; // sets GMAIL as the SMTP server
+//         $mail->Port = 25; // set the SMTP port for the GMAIL server
+//         $mail->Username = "learn.code.630@gmail.com"; // GMAIL username
+//         $mail->Password = "learn@xpert"; // GMAIL password
+//     }
+    
+//     //Typical mail data
+//     $mail->AddAddress($emailid);
+//     $mail->SetFrom("learn.code.630@gmail.com", "xpert");
+//     $mail->Subject = $subject;
+//     $mail->Body = $message;
+    
+//     try{
+//         $mail->Send();
+//         echo "Success!";
+//         header("Location:../customer/forgot-password.php");
+//     } catch(Exception $e){
+//         //Something went bad
+//         echo "Fail - " . $mail->ErrorInfo;
+//          header("Location:../customer/forgot-password.php");
+//     }
+// }
+
+function showlatestactivities(){
+     $conn = connect();
+      // echo "loading the activity";
+      $query = "SELECT *
+      FROM activities
+      WHERE STR_TO_DATE(DATE, '%Y-%m-%d') >= DATE_SUB(CURRENT_DATE(), INTERVAL 1 DAY)
+        AND STR_TO_DATE(DATE, '%Y-%m-%d') <= DATE_ADD(CURRENT_DATE(), INTERVAL 1 DAY);";
+      //$query = "SELECT * FROM `activities` where date = CURDATE()-1 || date = CURDATE()";
+      $result = mysqli_query($conn,$query);
+     //  print_r($result);
+      mysqli_close($conn);
+      return $result;
+}
+
+
+function showstaffnamebyuname($uname){
+    //echo $id;
+    echo "----------".$uname;
+    $conn = connect();
+    // echo "loading the records";
+    $query = "SELECT * FROM `staff` where username = '".$uname."'";
+    // echo $query;
+    $result = mysqli_query($conn,$query);
+    while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+        $sid =  $row['staff_id'];
+       // echo "count : ".$count;
+    }
+     mysqli_close($conn);
+    return $sid;
+}
+function countallnotifications(){
+      $conn = connect();
+    // echo "loading the records";
+    $query = "SELECT (sum(leads)+sum(quotations)+sum(customers)) as total FROM `notify_tab`";
+    // echo $query;
+    $result = mysqli_query($conn,$query);
+    while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+        $total =  $row['total'];
+       // echo "count : ".$total;
+    }
+  
+    return $total;
+}
+function getnotifysubject(){
+      $conn = connect();
+    // echo "loading the records";
+    $query = "SELECT subject,message FROM `notify_tab`";
+    // echo $query;
+    $result = mysqli_query($conn,$query);
+    // while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+    //     $total =  $row['total'];
+    //    // echo "count : ".$total;
+    // }
+  
+    return $result;
+}
+
+function getleadsbetweendates($from,$to){
+    include ("../connection.php");
+    $conn = connect();
+    // die("loading the records");
+    $query = "SELECT* FROM `leads_tab` where updated_date >= '".$from."' and updated_date <= '".$to."' and status = 1 and deleted = 0";
+    // echo $query;
+    $result = mysqli_query($conn,$query);
+    return $result;
+}
+function showleadcount(){
+    // include ("../connection.php");
+    $conn = connect();
+    $cnt  = 0;
+    $result = mysqli_query($conn, "SELECT count(*) as cnt FROM leads_tab");                                                                   
+    $row = mysqli_fetch_assoc($result);
+    $cnt =  $row["cnt"];
+    // mysqli_close($conn);
+    return $cnt;
+}
+function showoppocount(){
+    // include ("../connection.php");
+    $conn = connect();
+    $cnt = 0;
+    $result = mysqli_query($conn, "SELECT count(*) as cnt FROM opportunity");                                                                   
+    $row = mysqli_fetch_assoc($result);
+    
+    $cnt =  $row["cnt"];
+    // mysqli_close($conn);
+    return $cnt;
+}
+function showactivitycount(){
+    // include ("../connection.php");
+    $conn = connect();
+    $cnt  = 0;
+    $result = mysqli_query($conn, "SELECT count(*) as cnt FROM activities");                                                                   
+    $row = mysqli_fetch_assoc($result);
+    $cnt =  $row["cnt"];
+    // mysqli_close($conn);
+    return $cnt;
+}
+function showproductcount(){
+    // include ("../connection.php");
+    $conn = connect();
+    $cnt = 0;
+    $result = mysqli_query($conn, "SELECT count(*) as cnt FROM product");                                                                   
+    $row = mysqli_fetch_assoc($result);
+    $cnt =  $row["cnt"];
+    // mysqli_close($conn);
+    return $cnt;
+}
